@@ -20,9 +20,9 @@ export class SolarPanelService {
         this.loading.set(true);
         this.error.set(null);
         try {
-            const data = await firstValueFrom(this.http.get<SolarPanel[]>('http://localhost:3000/api/panels'));
-            this.panels.set(data);
-            console.log('Solar panels loaded:', data.length);
+            const response = await firstValueFrom(this.http.get<{success: boolean, data: SolarPanel[]}>('http://localhost:3000/api/panels'));
+            this.panels.set(response.data);
+            console.log('Solar panels loaded:', response.data.length);
 
         }catch (err) {
             this.error.set('Failed to load solar panels');
@@ -35,9 +35,9 @@ export class SolarPanelService {
         this.loading.set(true);
         this.error.set(null);
         try {
-            const data = await firstValueFrom(this.http.get<ProductionData[]>('http://localhost:3000/api/production'));
-            this.productionData.set(data);
-            console.log('Production data loaded:', data.length);
+            const response = await firstValueFrom(this.http.get<{success: boolean, data: ProductionData[]}>('http://localhost:3000/api/production'));
+            this.productionData.set(response.data);
+            console.log('Production data loaded:', response.data.length);
         } catch (err) {
             this.error.set('Failed to load production data');
             console.error(err);
