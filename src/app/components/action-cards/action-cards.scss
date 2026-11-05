@@ -1,0 +1,29 @@
+.action-card{
+    width: 100%;
+    max-width: 350px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    &.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    }
+}
+
+
+
+.icon {
+    font-size: 40px;
+    margin-right: 8px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+mat-card-actions{
+    padding: 25px;
+}
+
+mat-card-title{
+    display: flex;
+    flex-direction: column;
+    font-weight: 400;
+}
