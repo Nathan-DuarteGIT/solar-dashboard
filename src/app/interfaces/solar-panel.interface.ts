@@ -10,3 +10,4 @@ export interface ProductionData {
     hour: number; // 1-24
     production: number; // Production in that hour
     type: 'production' | 'limited' | 'idle'; // Production
+}
