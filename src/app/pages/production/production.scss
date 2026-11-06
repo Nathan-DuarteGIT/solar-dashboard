@@ -1,0 +1,124 @@
+
+body {
+    margin: 0 auto;
+    padding: 10px 200px;
+    max-width: 1400px;
+    background-color: #e0f1fb;
+}
+
+.production-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding: 10px 16px;
+
+    h2 {
+        margin: 0;
+        font-weight: 500;
+    }
+
+    .view-toggle {
+
+        padding: 2px;
+        display: flex;
+        gap: 8px;
+    }
+
+    .toggle-button {
+        background-color: var(--mat-sys-surface-variant);
+        border-radius: 8px;
+    }
+}
+
+.metrics-section {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 24px;
+
+
+
+    .metric-card {
+        flex: 1;
+        padding: 0 8px 16px 8px;
+
+
+        mat-card-subtitle {
+            margin-top: 0;
+        }
+
+        mat-card-title {
+            font-size: 36px;
+            font-weight: 500;
+            margin-top: 12px;
+
+            .unit {
+                font-size: 14px;
+                font-weight: 200;
+                margin-left: -4px;
+            }
+        }
+    }
+
+}
+
+.solar-list {
+    margin-top: 16px;
+    padding: 20px;
+    background-color: var(--mat-sys-surface);
+
+
+    .table-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+
+        h3 {
+            margin: 0;
+            font-weight: 500;
+        }
+
+        button[mat-flat-button] {
+            --mdc-protected-button-container-color: var(--mat-sys-primary) !important;
+            --mdc-protected-button-label-text-color: white !important;
+        }
+    }
+
+    .solar-table {
+        width: 100%;
+        margin-top: 16px;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .status-active {
+        --mdc-chip-elevated-container-color: var(--mat-sys-primary);
+        --mdc-chip-label-text-color: white;
+        background-color: var(--mat-sys-primary) !important;
+
+        ::ng-deep .mat-mdc-chip-action-label {
+            color: white !important;
+        }
+    }
+
+    .status-maintenance {
+        --mdc-chip-elevated-container-color: #f5a937;
+        --mdc-chip-label-text-color: white;
+        background-color: #f5a937 !important;
+
+        ::ng-deep .mat-mdc-chip-action-label {
+            color: white !important;
+        }
+    }
+
+    .status-inactive {
+        --mdc-chip-elevated-container-color: #9e9e9e;
+        --mdc-chip-label-text-color: white;
+        background-color: #9e9e9e !important;
+
+        ::ng-deep .mat-mdc-chip-action-label {
+            color: white !important;
+        }
+    }
+}
