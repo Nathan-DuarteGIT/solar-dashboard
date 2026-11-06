@@ -5,8 +5,11 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatCardModule} from '@angular/material/card';
-import {SolarPanelService} from '../../services/solar-panel.service';
 import { solarPanelStore } from '../../stores/solar-panel.store';
+import { SolarPanel } from '../../interfaces/solar-panel.interface';
+import { PanelDialog } from '../../components/panel-dialog/panel-dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { firstValueFrom } from 'rxjs/internal/firstValueFrom';
 
 @Component({
   imports: [
@@ -23,6 +26,7 @@ import { solarPanelStore } from '../../stores/solar-panel.store';
   templateUrl: './production.html',
 })
 export class Production {
+  dialog = inject(MatDialog);
   solarPanelStore = inject(solarPanelStore);
 
   ngOnInit() {
@@ -36,12 +40,22 @@ export class Production {
 
   displayedColumns: string[] = ['id', 'location', 'capacity', 'production', 'status', 'actions'];
 
-  addPanel() {
-    console.log('Add clicked');
-  }
+  async openPanelDialog(panel?: SolarPanel) {
+    const dialogRef = this.dialog.open(PanelDialog, {
+      width: '450px',
+      data: panel ? { ...panel } : null
+    });
 
-  editPanel(panel: any) {
-    console.log('edit', panel);
+    const formData = await firstValueFrom(dialogRef.afterClosed());
+
+    if (formData) {
+      if (panel) {
+        this.solarPanelStore.updatePanel(panel.id, formData);
+      } else {
+        this.solarPanelStore.addPanel(formData);
+      }
+    }
+    
   }
   
   async deletePanel(id: string) {

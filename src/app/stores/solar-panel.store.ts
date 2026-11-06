@@ -39,6 +39,31 @@ export const solarPanelStore = signalStore(
             }
         },
 
+        async addPanel(newPanelData: Omit<SolarPanel, 'id'>) {
+            patchState(store, { loading: true });
+            try {
+                const newPanel = await api.addPanelApi(newPanelData);
+                patchState(store, (state) => ({ 
+                    panels: [newPanel,...state.panels], 
+                    loading: false }));
+            } catch (error) {
+                patchState(store, { error: 'Failed to add solar panel', loading: false });
+            }
+        },
+
+        async updatePanel(id: string, updatedData: Partial<SolarPanel>) {
+            patchState(store, { loading: true });
+            try {
+                const updatedPanel = await api.updatePanelApi(id, updatedData);
+                patchState(store, (state) => ({
+                    panels: state.panels.map(p => p.id === id ? updatedPanel : p),
+                    loading: false
+                }));
+            } catch (error) {
+                patchState(store, { error: 'Failed to update solar panel', loading: false });
+            }
+        },
+
         async deletePanel(id: string) {
             patchState(store, { loading: true});
             try {
