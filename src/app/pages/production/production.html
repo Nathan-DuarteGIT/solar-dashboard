@@ -20,14 +20,14 @@
         <mat-card class="metric-card">
             <mat-card-header>
                 <mat-card-subtitle>Total Production Today</mat-card-subtitle>
-                <mat-card-title>{{ totalProduction() }} <span class="unit">kWh</span></mat-card-title>
+                <mat-card-title>{{ solarPanelStore.totalProduction() }} <span class="unit">kWh</span></mat-card-title>
             </mat-card-header>
         </mat-card>
 
         <mat-card class="metric-card">
             <mat-card-header>
                 <mat-card-subtitle>Active Panels</mat-card-subtitle>
-                <mat-card-title>{{ activePanelsCount() }} <span class="unit">units</span></mat-card-title>
+                <mat-card-title>{{ solarPanelStore.activePanelsCount() }} <span class="unit">units</span></mat-card-title>
             </mat-card-header>
         </mat-card>
     </section>
@@ -41,7 +41,7 @@
                 Add New Panel
             </button>
         </div>
-        <table mat-table [dataSource]="panels()" class="mat-elevation-z8 solar-table">
+        <table mat-table [dataSource]="solarPanelStore.panels()" class="mat-elevation-z8 solar-table">
             <ng-container matColumnDef="id">
                 <th mat-header-cell *matHeaderCellDef>Panel ID</th>
                 <td mat-cell *matCellDef="let panel">{{ panel.id }}</td>
@@ -59,7 +59,7 @@
 
             <ng-container matColumnDef="production">
                 <th mat-header-cell *matHeaderCellDef>Today Production (kWh)</th>
-                <td mat-cell *matCellDef="let panel">{{ panel.production }} kWh</td>
+                <td mat-cell *matCellDef="let panel">{{ panel.todayProduction }} kWh</td>
             </ng-container>
 
             <ng-container matColumnDef="status">

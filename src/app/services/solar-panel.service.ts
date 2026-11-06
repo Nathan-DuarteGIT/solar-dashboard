@@ -8,7 +8,35 @@ import { SolarPanel } from '../interfaces/solar-panel.interface';
 export class SolarPanelService {
     private http = inject(HttpClient);
 
-    panels = signal<SolarPanel[]>([]); // Array of solar panels
+    async fetchPanels(): Promise<SolarPanel[]> {
+        try {
+            const response = await firstValueFrom(this.http.get<{ success: boolean, data: SolarPanel[] }>('http://localhost:3000/api/panels'));
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching solar panels:', error);
+            throw error;
+        }
+    }
+
+    async fetchProductionData(): Promise<ProductionData[]> {
+        const response = await firstValueFrom(
+            this.http.get<{ success: boolean, data: ProductionData[] }>('http://localhost:3000/api/production')
+        );
+        return response.data;
+    }
+
+    async deletePanelApi(id: string): Promise<void> {
+        try {
+            await firstValueFrom(this.http.delete(`http://localhost:3000/api/panels/${id}`));
+        } catch (error) {
+            console.error('Error deleting solar panel:', error);
+            throw error;
+        }
+    }
+
+
+    //service without signal store 
+    /*panels = signal<SolarPanel[]>([]); // Array of solar panels
     productionData = signal<ProductionData[]>([]); // Hourly production
     loading = signal<boolean>(false); // Loading indicator
     error = signal<string | null>(null); // Error messages
@@ -96,5 +124,5 @@ export class SolarPanelService {
         } finally {
             this.loading.set(false);
         }
-    }
+    }*/
 }

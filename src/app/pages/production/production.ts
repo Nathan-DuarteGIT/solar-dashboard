@@ -6,6 +6,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatCardModule} from '@angular/material/card';
 import {SolarPanelService} from '../../services/solar-panel.service';
+import { solarPanelStore } from '../../stores/solar-panel.store';
 
 @Component({
   imports: [
@@ -22,18 +23,16 @@ import {SolarPanelService} from '../../services/solar-panel.service';
   templateUrl: './production.html',
 })
 export class Production {
-  solarPanelService = inject(SolarPanelService);
+  solarPanelStore = inject(solarPanelStore);
 
   ngOnInit() {
-    this.solarPanelService.loadPanels();
-    this.solarPanelService.loadProductionData();
+    this.solarPanelStore.loadDasboardData();
   }
 
   viewMode = signal<'table' | 'chart'>('table');
 
-  panels = this.solarPanelService.panels;
-  totalProduction = this.solarPanelService.getTotalProduction;
-  activePanelsCount = this.solarPanelService.getActivePanelsCount;
+  panels = this.solarPanelStore.panels;
+  
 
   displayedColumns: string[] = ['id', 'location', 'capacity', 'production', 'status', 'actions'];
 
@@ -50,7 +49,7 @@ export class Production {
 
     if (isConfirmed) {
       try {
-        await this.solarPanelService.deletePanel(id);
+        await this.solarPanelStore.deletePanel(id);
       } catch (err) {
         console.error('Error deleting panel:', err);
       }
