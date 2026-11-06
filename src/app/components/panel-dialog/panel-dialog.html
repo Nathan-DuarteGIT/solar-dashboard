@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>{{ isEditMode ? 'Edit' : 'Add' }} Solar Panel</h2>
+
+<mat-dialog-content>
+    <form #panelForm="ngForm" class="dialog-form">
+        <mat-form-field>
+            <mat-label>Location</mat-label>
+            <input matInput name="location" [(ngModel)]="formData.location" required minlength="3" #locationCtrl="ngModel" />
+            @if(locationCtrl.invalid && locationCtrl.touched){
+                <mat-error>Location must be at least 3 characters long</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Capacity (kW)</mat-label>
+            <input matInput name="capacity" [(ngModel)]="formData.capacity" type="number" required #capacityCtrl="ngModel" />
+            @if(capacityCtrl.invalid && capacityCtrl.touched){
+                <mat-error>Capacity is required and must be more than 0</mat-error>
+            }
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Today's Production (kWh)</mat-label>
+            <input matInput name="todayProduction" [(ngModel)]="formData.todayProduction" type="number" />
+
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Status</mat-label>
+            <mat-select name="status" [(ngModel)]="formData.status" required #statusCtrl="ngModel">
+                <mat-option value="Active">Active</mat-option>
+                <mat-option value="Maintenance">Maintenance</mat-option>
+                <mat-option value="Inactive">Inactive</mat-option>
+            </mat-select>
+            @if(statusCtrl.invalid && statusCtrl.touched){
+                <mat-error>Status is required</mat-error>
+            }
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-raised-button color="primary" [disabled]="panelForm.invalid" (click)="onSave()">
+        {{ isEditMode ? 'Update' : 'Add' }}
+    </button>
+</mat-dialog-actions>

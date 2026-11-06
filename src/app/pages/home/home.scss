@@ -1,0 +1,25 @@
+.hero-section {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.title {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: blue;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  margin-bottom: 0px;
+  color: #666;
+}
+
+.action-cards-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+  padding-bottom: 30px;
+}
