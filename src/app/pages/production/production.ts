@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { firstValueFrom } from 'rxjs/internal/firstValueFrom';
 import { BaseChartDirective, provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   imports: [
@@ -21,7 +22,8 @@ import { ChartConfiguration, ChartOptions } from 'chart.js';
     MatIconModule,
     MatChipsModule,
     MatCardModule,
-    BaseChartDirective
+    BaseChartDirective,
+    MatProgressSpinnerModule
   ],
   providers: [provideCharts(withDefaultRegisterables())],
   standalone: true,
@@ -47,7 +49,6 @@ export class Production implements OnInit {
       tooltip: { enabled: true }
     }
   };
-
 
           ngOnInit() {
             this.solarPanelStore.loadDasboardData();

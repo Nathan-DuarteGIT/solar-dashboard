@@ -152,3 +152,63 @@ body {
   width: 100%;
   position: relative;
 }
+
+.state-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  margin-top: 24px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.loading-state p {
+  margin-top: 16px;
+  color: #666;
+  font-weight: 500;
+}
+
+.error-state mat-icon {
+  font-size: 48px;
+  height: 48px;
+  width: 48px;
+  color: #f44336; 
+  margin-bottom: 16px;
+}
+
+.error-state h2 {
+  color: #f44336;
+  margin: 0 0 8px 0;
+}
+.error-state .error-msg {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+.error-state .help-text {
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.empty-state .large-icon {
+  font-size: 64px;
+  height: 64px;
+  width: 64px;
+  color: #f39c12; 
+  margin-bottom: 24px;
+}
+
+.empty-state h2 {
+  font-size: 24px;
+  margin: 0 0 8px 0;
+  color: #2c3e50;
+}
+
+.empty-state p {
+  color: #7f8c8d;
+  margin-bottom: 24px;
+  font-size: 16px;
+}
