@@ -1,0 +1,20 @@
+<section class="hero-section">
+    <h1 class = "title">Welcome to Solar Energy Dashboard</h1>
+    <p class = "subtitle">Monitor, analyze and optimize your renewable energy production</p>
+</section>
+<section class="action-cards-section">
+    <app-action-cards
+        title="Solar Panel Production"
+        description="View detailed production data and monitor the performance of your solar panels."
+        icon="📊"
+        chipText="Click to view"
+        (click)="goToProduction()">
+    </app-action-cards>
+    <app-action-cards
+        title="Scenario Analysis"
+        description="Simulate weather conditions and predict future energy production scenarios."
+        icon="🔮"
+        chipText="Coming soon"
+        [isDisabled]="true">
+    </app-action-cards>
+</section>
