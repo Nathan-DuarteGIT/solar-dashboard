@@ -91,8 +91,32 @@
         </table>
     </div>
 
+    }@else if(viewMode() === 'chart'){
+        <mat-card class="chart-card">
+            <mat-card-header>
+                <mat-card-title>Daily Production Overview</mat-card-title>
+            </mat-card-header>
 
-    }@else{
+            <mat-card-content>
+                <div class="chart-metrics">
+                    <div class="metric">
+                        <span class="label">Total Today:</span>
+                        <span class="value">{{ solarPanelStore.chartTotalToday() }} kWh</span>
+                    </div>
+                    <div class="metric">
+                        <span class="label">Peak Hour:</span>
+                        <span class="value">{{ solarPanelStore.peakHour() }}</span>
+                    </div>
+                </div>
 
+                <div class="chart-container">
+                    <canvas baseChart
+                        [data]="solarPanelStore.chartData()"
+                        [options]="barChartOptions"
+                        [type]="'bar'">
+                    </canvas>
+                </div>
+            </mat-card-content>
+        </mat-card>
     }
 </body>

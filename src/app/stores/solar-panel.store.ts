@@ -22,7 +22,34 @@ export const solarPanelStore = signalStore(
     withState(initialState),
     withComputed((store) => ({
         totalProduction: computed(() => store.panels().reduce((total, p) => total + p.todayProduction, 0)),
-        activePanelsCount: computed(() => store.panels().filter(p => p.status === 'Active').length)
+        activePanelsCount: computed(() => store.panels().filter(p => p.status === 'Active').length),
+        chartTotalToday: computed(() => store.productionData().reduce((total, p) => total + p.production, 0)),
+        peakHour: computed(() => {
+            const data = store.productionData();
+            if (data.length === 0) return '-';
+            const peak = data.reduce((max, current) => max.production > current.production ? max : current);
+            return `H${peak.hour} (${peak.production} MW)`;
+        }),
+        chartData: computed(() => {
+            const data = store.productionData();
+            return {
+                labels: data.map(d => `H${d.hour}`),
+                datasets: [
+                    {
+                        data: data.map(d => d.production),
+                        label: 'Energy Production (MW)',
+                        backgroundColor: data.map(d => {
+                            switch (d.type) {
+                                case 'production': return 'rgba(39, 174, 96, 0.8)'; // Green
+                                case 'limited': return 'rgba(155, 89, 182, 0.8)'; // purple
+                                case 'idle': return 'rgba(52, 152, 219, 0.8)'; // Blue
+                                default: return 'rgba(0, 0, 0, 0.1)'; // Default color
+                            }
+                        })
+                    }
+                ]
+            };
+        })
     })),
     withMethods((store, api = inject(SolarPanelService)) => ({
         async loadDasboardData() {

@@ -122,3 +122,33 @@ body {
         }
     }
 }
+
+.chart-card {
+  margin-top: 24px;
+}
+
+.chart-metrics {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.metric .label {
+  font-weight: 500;
+  color: #666;
+  margin-right: 8px;
+}
+
+.metric .value {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.chart-container {
+  height: 400px; /* Altura fixa exigida pela Task */
+  width: 100%;
+  position: relative;
+}
